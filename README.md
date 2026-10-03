@@ -19,6 +19,8 @@ php artisan vexpay:install
 php artisan migrate
 ```
 
+Published on [Packagist](https://packagist.org/packages/vexpay/laravel); it pulls in [`vexpay/vexpay-php`](https://packagist.org/packages/vexpay/vexpay-php) and works with the Guzzle 7 or 8 that your app already has.
+
 `vexpay:install` publishes `config/vexpay.php` and the `vexpay_payments` migration, then prints the webhook URL to register. Add your keys to `.env` (VEXPay dashboard — use the test-mode key while you build):
 
 ```dotenv
