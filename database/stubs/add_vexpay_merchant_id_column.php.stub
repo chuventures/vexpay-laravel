@@ -1,0 +1,22 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::table('{{ table }}', function (Blueprint $table) {
+            $table->string('vexpay_merchant_id')->nullable()->unique();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('{{ table }}', function (Blueprint $table) {
+            $table->dropUnique(['vexpay_merchant_id']);
+            $table->dropColumn('vexpay_merchant_id');
+        });
+    }
+};

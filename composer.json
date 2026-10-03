@@ -1,0 +1,60 @@
+{
+  "name": "vexpay/laravel",
+  "description": "Official Laravel integration for VEXPay: verified webhooks as events, Billable checkouts, marketplace payouts, and test fakes.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "vexpay",
+    "laravel",
+    "payments",
+    "venezuela",
+    "pago movil",
+    "c2p",
+    "webhooks",
+    "checkout"
+  ],
+  "homepage": "https://github.com/chuventures/vexpay-laravel",
+  "support": {
+    "issues": "https://github.com/chuventures/vexpay-laravel/issues"
+  },
+  "require": {
+    "php": "^8.2",
+    "illuminate/console": "^12.0|^13.0",
+    "illuminate/contracts": "^12.0|^13.0",
+    "illuminate/database": "^12.0|^13.0",
+    "illuminate/http": "^12.0|^13.0",
+    "illuminate/routing": "^12.0|^13.0",
+    "illuminate/support": "^12.0|^13.0",
+    "illuminate/view": "^12.0|^13.0",
+    "vexpay/vexpay-php": "^0.1"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^10.0|^11.0",
+    "phpunit/phpunit": "^11.5|^12.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "VexPay\\Laravel\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "VexPay\\Laravel\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "VexPay\\Laravel\\VexPayServiceProvider"
+      ],
+      "aliases": {
+        "VexPay": "VexPay\\Laravel\\Facades\\VexPay"
+      }
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
