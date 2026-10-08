@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Allow `vexpay/vexpay-php` 0.3, which adds `balance->transactions->list()` (every movement in your VES balance, for automatic reconciliation). The new `payment.chargeback` / `payment.chargeback_closed` webhooks dispatch `PaymentChargeback` / `PaymentChargebackClosed` events.
+
 ## 0.1.1
 
 - Allow `vexpay/vexpay-php` 0.2, which adds `conversions` (convert available VES to USDT). `VexPay::conversions()` is now documented on the facade, and the new `conversion.completed` / `conversion.canceled` webhooks dispatch `ConversionCompleted` / `ConversionCanceled` events.

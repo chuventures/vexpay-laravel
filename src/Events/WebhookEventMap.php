@@ -18,6 +18,8 @@ final class WebhookEventMap
         'payment.failed' => W\PaymentFailed::class,
         'payment.canceled' => W\PaymentCanceled::class,
         'payment.reversed' => W\PaymentReversed::class,
+        'payment.chargeback' => W\PaymentChargeback::class,
+        'payment.chargeback_closed' => W\PaymentChargebackClosed::class,
         'merchant.verified' => W\MerchantVerified::class,
         'merchant.rejected' => W\MerchantRejected::class,
         'merchant.deactivated' => W\MerchantDeactivated::class,
