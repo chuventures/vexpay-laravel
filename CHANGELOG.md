@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Allow `vexpay/vexpay-php` 0.4, whose checkout sessions accept `cop` (Colombian pesos: Bre-B, Nequi, Daviplata).
+
 ## 0.1.2
 
 - Allow `vexpay/vexpay-php` 0.3, which adds `balance->transactions->list()` (every movement in your VES balance, for automatic reconciliation). The new `payment.chargeback` / `payment.chargeback_closed` webhooks dispatch `PaymentChargeback` / `PaymentChargebackClosed` events.
