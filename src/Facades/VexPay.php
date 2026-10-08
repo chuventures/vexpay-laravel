@@ -22,6 +22,7 @@ use VexPay\VexPayClient;
  * @method static \VexPay\Resource\WebhookEndpoints webhookEndpoints()
  * @method static \VexPay\Resource\Crypto crypto()
  * @method static \VexPay\Resource\Conversions conversions()
+ * @method static \VexPay\Resource\Cop cop()
  * @method static void assertSent(string $operationId, ?callable $callback = null)
  * @method static void assertNotSent(string $operationId, ?callable $callback = null)
  * @method static void assertNothingSent()

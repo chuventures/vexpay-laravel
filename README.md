@@ -42,7 +42,12 @@ use VexPay\Laravel\Facades\VexPay;
 $quote = VexPay::quotes()->retrieve(['usdAmount' => 25]);
 $payment = VexPay::payments()->retrieve('pay_123');
 $banks = VexPay::banks()->list();
+
+// Colombian pesos (Bre-B, Nequi, Daviplata) — see the vexpay-php README for every channel and the test values.
+$cop = VexPay::cop()->payments->create(['amountCop' => 100000, 'channel' => 'breb', 'reference' => 'order-1042']);
 ```
+
+A Billable checkout can also be paid in Colombian pesos when COP is enabled on your account: the payment syncs like any other, with `method` `COP` and no `amount_ves`.
 
 A missing `VEXPAY_API_KEY` never breaks boot; the first API call throws a `VexPay\Exception\ConfigurationException` naming it.
 

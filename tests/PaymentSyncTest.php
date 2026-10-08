@@ -50,6 +50,32 @@ final class PaymentSyncTest extends TestCase
         Event::assertDispatched(PaymentSucceeded::class, fn (PaymentSucceeded $e) => $e->billable()?->is($this->order) === true);
     }
 
+    public function testCopPaidCheckoutIsSynced(): void
+    {
+        Event::fake([PaymentSucceeded::class]);
+
+        // A Billable checkout paid in Colombian pesos: the COP payload has no VES fields.
+        $this->postVexPayPaymentWebhook($this->payment, 'payment.completed', [
+            'paymentId' => 'cop_77',
+            'method' => 'COP',
+            'currency' => 'COP',
+            'status' => 'completed',
+            'channel' => 'nequi',
+            'amountCop' => 82500,
+            'amountUsd' => '25.00',
+            'copRate' => '3300.000000',
+            'vesAmount' => null,
+            'bcvRate' => null,
+        ])->assertNoContent();
+
+        $this->payment->refresh();
+        self::assertSame(Payment::STATUS_COMPLETED, $this->payment->status);
+        self::assertSame('cop_77', $this->payment->payment_id);
+        self::assertSame('COP', $this->payment->method);
+        self::assertNull($this->payment->amount_ves);
+        Event::assertDispatchedTimes(PaymentSucceeded::class, 1);
+    }
+
     public function testDuplicateDeliveryChangesNothingAndDoesNotRefire(): void
     {
         Event::fake([PaymentSucceeded::class]);

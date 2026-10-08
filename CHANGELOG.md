@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+- Allow `vexpay/vexpay-php` 0.5, which adds `cop` (Colombian pesos: Bre-B, Nequi, Daviplata). `VexPay::cop()` is documented on the facade, and a Billable checkout paid in COP syncs with `method` `COP`.
+
 ## 0.1.3
 
 - Allow `vexpay/vexpay-php` 0.4, whose checkout sessions accept `cop` (Colombian pesos: Bre-B, Nequi, Daviplata).
