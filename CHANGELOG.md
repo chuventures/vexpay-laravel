@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Allow `vexpay/vexpay-php` 0.6, whose conversions accept COP and add auto-convert settings. New `ConversionCreated` event for the `conversion.created` webhook.
+
 ## 0.1.4
 
 - Allow `vexpay/vexpay-php` 0.5, which adds `cop` (Colombian pesos: Bre-B, Nequi, Daviplata). `VexPay::cop()` is documented on the facade, and a Billable checkout paid in COP syncs with `method` `COP`.

@@ -246,6 +246,10 @@ class CheckoutTest extends TestCase
 
 Also available: `VexPay::assertSent($operationId, $callback)`, `assertNotSent`, `assertNothingSent`, `assertMerchantCreated`, `postVexPayWebhook($event, $data)` for any event name, and `VexPay\Laravel\Testing\SignedWebhook` to build signed payloads yourself.
 
+### Testing card payments
+
+With a test API key, VPOS test cards return a fixed outcome without reaching the bank: `4242424242424242` succeeds, `4000000000009995` is declined with `G51` (insufficient funds), `4000000000000259` completes and is then charged back, and more. A decline fails exactly like a live one (422, the bank code in `code` and `failureCode`, a `payment.failed` webhook). With a live key these numbers are refused with 400 `test_card_in_live_mode`. Full list: [test cards](https://docs.pay.vexwallet.co/vpos#test-card).
+
 ## Artisan
 
 | Command | |

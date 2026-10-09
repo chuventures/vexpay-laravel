@@ -34,6 +34,7 @@ final class WebhookEventMap
         'merchant.wallet_credit' => W\MerchantWalletCredit::class,
         'payout.completed' => W\PayoutCompleted::class,
         'payout.failed' => W\PayoutFailed::class,
+        'conversion.created' => W\ConversionCreated::class,
         'conversion.completed' => W\ConversionCompleted::class,
         'conversion.canceled' => W\ConversionCanceled::class,
         'tenant.status_changed' => W\TenantStatusChanged::class,
