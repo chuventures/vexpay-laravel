@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- Allow `vexpay/vexpay-php` 0.7: `VexPay::payments()->methods()` and C2P `vesAmount`.
+
 ## 0.1.5
 
 - Allow `vexpay/vexpay-php` 0.6, whose conversions accept COP and add auto-convert settings. New `ConversionCreated` event for the `conversion.created` webhook.
