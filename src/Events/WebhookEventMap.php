@@ -37,6 +37,7 @@ final class WebhookEventMap
         'conversion.created' => W\ConversionCreated::class,
         'conversion.completed' => W\ConversionCompleted::class,
         'conversion.canceled' => W\ConversionCanceled::class,
+        'onward_payout.updated' => W\OnwardPayoutUpdated::class,
         'tenant.status_changed' => W\TenantStatusChanged::class,
         'tenant.api_key.created' => W\TenantApiKeyCreated::class,
         'tenant.api_key.rotated' => W\TenantApiKeyRotated::class,

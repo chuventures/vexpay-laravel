@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7
+
+- Allow `vexpay/vexpay-php` 0.8: `onwardPayout` on Pago Móvil and C2P pay-ins, and `rate`/`rateSource` on quotes and receipts. New `OnwardPayoutUpdated` event for the `onward_payout.updated` webhook.
+
 ## 0.1.6
 
 - Allow `vexpay/vexpay-php` 0.7: `VexPay::payments()->methods()` and C2P `vesAmount`.
