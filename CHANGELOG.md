@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.8
+
+- Allow `vexpay/vexpay-php` 0.9: held balances (`heldVes`/`held`/`heldCop`, `nextReleaseAt`, `balanceHoldHours`) and the onward payout `waiting_release` status.
+
 ## 0.1.7
 
 - Allow `vexpay/vexpay-php` 0.8: `onwardPayout` on Pago Móvil and C2P pay-ins, and `rate`/`rateSource` on quotes and receipts. New `OnwardPayoutUpdated` event for the `onward_payout.updated` webhook.
