@@ -20,7 +20,8 @@ trait Billable
      * Create a checkout session for `$amountUsd` and record it locally as pending.
      *
      * @param array<string, mixed> $options checkout session fields: description, successUrl, cancelUrl,
-     *                                      methods, allowedOrigins, metadata, expiresInMinutes, reference
+     *                                      methods, allowedOrigins, metadata, expiresInMinutes, reference,
+     *                                      merchantId, applicationFeePercent
      */
     public function checkout(float|int|string $amountUsd, array $options = []): Checkout
     {

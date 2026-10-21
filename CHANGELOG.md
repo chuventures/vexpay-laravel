@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.9
+
+- Allow `vexpay/vexpay-php` 0.10: split a checkout session with a merchant. `$user->checkout($amount, ['merchantId' => …, 'applicationFeePercent' => 3, 'methods' => ['pago_movil']])`.
+
 ## 0.1.8
 
 - Allow `vexpay/vexpay-php` 0.9: held balances (`heldVes`/`held`/`heldCop`, `nextReleaseAt`, `balanceHoldHours`) and the onward payout `waiting_release` status.
