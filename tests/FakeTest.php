@@ -41,6 +41,17 @@ final class FakeTest extends TestCase
         VexPay::assertNothingSent();
     }
 
+    public function testBillingResourcesThroughTheFacade(): void
+    {
+        VexPay::fake();
+
+        $customer = VexPay::customers()->create(['email' => 'ana@example.com']);
+        VexPay::subscriptions()->create(['customer' => $customer->id, 'price' => 'price_1']);
+
+        VexPay::assertSent('Customers_create', static fn (array $body) => $body['email'] === 'ana@example.com');
+        VexPay::assertSent('Subscriptions_create');
+    }
+
     public function testAssertionsFailWhenNothingMatches(): void
     {
         VexPay::fake();

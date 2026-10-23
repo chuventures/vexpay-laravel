@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.10
+
+- Allow `vexpay/vexpay-php` 0.11: billing resources `VexPay::customers()`, `prices()`, `subscriptions()`, `invoices()`, `setupSessions()` and `paymentMethods()`. The `Billable` trait (one-time checkouts) is unchanged.
+
 ## 0.1.9
 
 - Allow `vexpay/vexpay-php` 0.10: split a checkout session with a merchant. `$user->checkout($amount, ['merchantId' => …, 'applicationFeePercent' => 3, 'methods' => ['pago_movil']])`.
