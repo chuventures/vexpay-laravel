@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.11
+
+- Allow `vexpay/vexpay-php` 0.12: COP channels `pse`, `bancolombia_transfer` and `bancolombia_qr`, and `VexPay::cop()->channels()` for the channel catalog (PSE banks, terms links).
+- With `vexpay/vexpay-php` 0.12: disbursements (`VexPay::merchants()->transfer()`, `listTransactions()`, `retrieveStatement()`, `retrieveStatementCsv()`) and balance top-ups (`VexPay::balance()->topups`). `PayoutCompleted` / `PayoutFailed` add `feePaidByTenant()` and `feeVes()`.
+
 ## 0.1.10
 
 - Allow `vexpay/vexpay-php` 0.11: billing resources `VexPay::customers()`, `prices()`, `subscriptions()`, `invoices()`, `setupSessions()` and `paymentMethods()`. The `Billable` trait (one-time checkouts) is unchanged.

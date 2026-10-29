@@ -25,6 +25,25 @@ abstract class PayoutWebhookEvent extends VexPayWebhookEvent
     }
 
     /**
+     * True when your platform balance paid the withdrawal fee (`feePayer: "tenant"`, disbursements):
+     * the seller was debited only `monto`, and `feeVes()` is what your balance paid.
+     */
+    public function feePaidByTenant(): bool
+    {
+        return ($this->webhook->data['feePayer'] ?? null) === 'tenant';
+    }
+
+    /**
+     * Merchant-balance payouts: the withdrawal fee in VES ("0.00" when none), or null when absent.
+     */
+    public function feeVes(): ?string
+    {
+        $fee = $this->webhook->data['feeVes'] ?? null;
+
+        return is_string($fee) ? $fee : null;
+    }
+
+    /**
      * The seller model (using HasVexPayMerchant) that received the payout, if any.
      */
     public function owner(): ?Model

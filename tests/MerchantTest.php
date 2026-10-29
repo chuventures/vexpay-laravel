@@ -132,6 +132,27 @@ final class MerchantTest extends TestCase
         Event::assertDispatched(PayoutCompleted::class, static fn (PayoutCompleted $e) => $e->owner()?->is($seller) === true);
     }
 
+    public function testPayoutEventsExposeATenantPaidFee(): void
+    {
+        Event::fake([PayoutCompleted::class]);
+
+        $this->postVexPayWebhook('payout.completed', [
+            'payoutId' => 'po_2', 'merchantId' => 'mrc_1', 'externalRef' => 'payroll-2026-11-u1',
+            'monto' => '1000.00', 'feeVes' => '10.00', 'netVes' => '1000.00', 'debitVes' => '1000.00', 'feePayer' => 'tenant',
+        ])->assertNoContent();
+        $this->postVexPayWebhook('payout.completed', ['payoutId' => 'po_3', 'merchantId' => 'mrc_1', 'externalRef' => 'order-992'])
+            ->assertNoContent();
+
+        Event::assertDispatched(
+            PayoutCompleted::class,
+            static fn (PayoutCompleted $e) => $e->payoutId() === 'po_2' && $e->feePaidByTenant() && $e->feeVes() === '10.00',
+        );
+        Event::assertDispatched(
+            PayoutCompleted::class,
+            static fn (PayoutCompleted $e) => $e->payoutId() === 'po_3' && !$e->feePaidByTenant() && $e->feeVes() === null,
+        );
+    }
+
     public function testRefOfADifferentMerchantDoesNotResolve(): void
     {
         $seller = Seller::create(['name' => 'María', 'vexpay_merchant_id' => 'mrc_1']);

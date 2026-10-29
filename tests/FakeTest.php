@@ -52,6 +52,25 @@ final class FakeTest extends TestCase
         VexPay::assertSent('Subscriptions_create');
     }
 
+    public function testBalanceTopupsThroughTheFacade(): void
+    {
+        VexPay::fake()->stub('Topups_create', ['id' => 'tp_1', 'amountVes' => '100000.00']);
+
+        $topup = VexPay::balance()->topups->create([
+            'amountVes' => '100000.00',
+            'payerPhone' => '04121234567',
+            'payerCedula' => 'V12345678',
+            'sourceNote' => 'Ingresos publicidad quincena 2',
+        ]);
+        self::assertSame('tp_1', $topup->id);
+        VexPay::balance()->topups->list(['limit' => 5]);
+        VexPay::balance()->topups->instant('tp_1');
+
+        VexPay::assertSent('Topups_create', static fn (array $body) => $body['sourceNote'] === 'Ingresos publicidad quincena 2');
+        VexPay::assertSent('Topups_list');
+        VexPay::assertSent('Topups_instant');
+    }
+
     public function testAssertionsFailWhenNothingMatches(): void
     {
         VexPay::fake();

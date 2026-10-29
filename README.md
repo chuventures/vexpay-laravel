@@ -43,7 +43,7 @@ $quote = VexPay::quotes()->retrieve(['usdAmount' => 25]);
 $payment = VexPay::payments()->retrieve('pay_123');
 $banks = VexPay::banks()->list();
 
-// Colombian pesos (Bre-B, Nequi, Daviplata) — see the vexpay-php README for every channel and the test values.
+// Colombian pesos (PSE, Bancolombia, Bre-B, Nequi, Daviplata) — VexPay::cop()->channels() lists what you can use; see the vexpay-php README for every channel and the test values.
 $cop = VexPay::cop()->payments->create(['amountCop' => 100000, 'channel' => 'breb', 'reference' => 'order-1042']);
 ```
 
@@ -206,6 +206,10 @@ $seller->payout(1523.40, 'Venta #991', 'order-991');
 ```
 
 The merchant's external reference is `<morph alias>:<key>` (register a [morph map](https://laravel.com/docs/eloquent-relationships#custom-polymorphic-types) to keep it short and rename-proof), so retrying onboarding adopts the merchant that already exists instead of failing. The third argument of `payout()` is the payout's idempotency key: calling it again with the same reference never pays twice. Omit it and a random one is generated, which only protects the retries of that one call. `MerchantVerified`, `MerchantBalanceUpdated`, `PayoutCompleted`, `PayoutFailed` and the other merchant/payout events expose the seller via `owner()`.
+
+Seller balance movements and monthly statements go through the client: `VexPay::merchants()->transfer($id, ['amountUsd' => '100.00', 'transferKey' => '…'])` (USD converted at the official BCV rate), `listTransactions($id)`, `retrieveStatement($id, ['month' => '2026-11'])` and `retrieveStatementCsv($id, ['month' => '2026-11'])`, available with a `vexpay/vexpay-php` release that includes them. When your balance pays a disbursement's withdrawal fee, `PayoutCompleted` / `PayoutFailed` report it: `$event->feePaidByTenant()` and `$event->feeVes()`.
+
+Balance top-ups (loading your own Bs balance by Pago Móvil, enabled per account) also go through the client: `VexPay::balance()->topups->create([...])`, `list()`, `retrieve($id)`, `instant($id)` and, in test mode, `simulate($id)`, available with a `vexpay/vexpay-php` release that includes them.
 
 ## Testing
 
