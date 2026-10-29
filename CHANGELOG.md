@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.12
+
+- Allow `vexpay/vexpay-php` 0.13: `VexPay::crypto()->simulateDeposit()` for test-mode stablecoin deposits.
+
 ## 0.1.11
 
 - Allow `vexpay/vexpay-php` 0.12: COP channels `pse`, `bancolombia_transfer` and `bancolombia_qr`, and `VexPay::cop()->channels()` for the channel catalog (PSE banks, terms links).

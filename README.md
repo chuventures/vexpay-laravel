@@ -211,6 +211,8 @@ Seller balance movements and monthly statements go through the client: `VexPay::
 
 Balance top-ups (loading your own Bs balance by Pago Móvil, enabled per account) also go through the client: `VexPay::balance()->topups->create([...])`, `list()`, `retrieve($id)`, `instant($id)` and, in test mode, `simulate($id)`, available with a `vexpay/vexpay-php` release that includes them.
 
+In test mode, `VexPay::crypto()->simulateDeposit(['customerRef' => 'user_123', 'network' => 'TRC20', 'amount' => '40.00'])` makes a deposit arrive at one of your stablecoin deposit addresses (same payment, fee and `payment.completed` webhook, with `livemode: false`), available with a `vexpay/vexpay-php` release that includes it.
+
 ## Testing
 
 `VexPay::fake()` swaps the client for an in-memory one: nothing leaves the process, every operation answers with a valid response (echoing what you sent), and calls can be asserted. Stub responses by `operationId`. Signed webhooks come from the `InteractsWithVexPay` trait:

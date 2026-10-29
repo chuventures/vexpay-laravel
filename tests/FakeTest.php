@@ -71,6 +71,16 @@ final class FakeTest extends TestCase
         VexPay::assertSent('Topups_instant');
     }
 
+    public function testSimulateDepositThroughTheFacade(): void
+    {
+        VexPay::fake()->stub('Crypto_simulateDeposit', ['paymentId' => 'pay_1', 'simulated' => true, 'livemode' => false]);
+
+        $deposit = VexPay::crypto()->simulateDeposit(['customerRef' => 'user_123', 'network' => 'TRC20', 'amount' => '40.00']);
+        self::assertSame('pay_1', $deposit->paymentId);
+
+        VexPay::assertSent('Crypto_simulateDeposit', static fn (array $body) => $body['customerRef'] === 'user_123' && $body['amount'] === '40.00');
+    }
+
     public function testAssertionsFailWhenNothingMatches(): void
     {
         VexPay::fake();
