@@ -62,6 +62,8 @@ final class WebhookEventMap
         'payment_method.attached' => W\PaymentMethodAttached::class,
         'payment_method.updated' => W\PaymentMethodUpdated::class,
         'payment_method.detached' => W\PaymentMethodDetached::class,
+        'test_clock.advancing' => W\TestClockAdvancing::class,
+        'test_clock.ready' => W\TestClockReady::class,
         'notification.test' => W\NotificationTest::class,
     ];
 

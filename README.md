@@ -1,6 +1,6 @@
 # VEXPay for Laravel
 
-The official Laravel integration for [VEXPay](https://vexwallet.co/vexpay): accept Venezuelan payments (Pago Móvil C2P, cards, débito inmediato, USDT) and pay out to sellers, the Laravel way.
+The official Laravel integration for [VEXPay](https://vexpay.app): accept Venezuelan payments (Pago Móvil C2P, cards, débito inmediato, USDT) and pay out to sellers, the Laravel way.
 
 - `VexPay` facade and a container-bound client with the full API ([`vexpay/vexpay-php`](https://github.com/chuventures/vexpay-php))
 - Verified webhooks at `/vexpay/webhook`, dispatched as Laravel events
@@ -231,10 +231,10 @@ class CheckoutTest extends TestCase
     public function test_paid_orders_are_fulfilled(): void
     {
         config(['vexpay.webhook.secret' => 'whsec_test']);
-        VexPay::fake(['CheckoutSessions_create' => ['url' => 'https://pay.vexwallet.co/c/cs_1']]);
+        VexPay::fake(['CheckoutSessions_create' => ['url' => 'https://pay.vexpay.app/c/cs_1']]);
         $order = Order::factory()->create(['total_usd' => 25]);
 
-        $this->post(route('orders.pay', $order))->assertRedirect('https://pay.vexwallet.co/c/cs_1');
+        $this->post(route('orders.pay', $order))->assertRedirect('https://pay.vexpay.app/c/cs_1');
         VexPay::assertCheckoutCreated(25.00);
 
         $this->postVexPayPaymentWebhook($order->vexpayPayments()->first(), 'payment.completed')->assertNoContent();
@@ -254,7 +254,7 @@ Also available: `VexPay::assertSent($operationId, $callback)`, `assertNotSent`, 
 
 ### Testing card payments
 
-With a test API key, VPOS test cards return a fixed outcome without reaching the bank: `4242424242424242` succeeds, `4000000000009995` is declined with `G51` (insufficient funds), `4000000000000259` completes and is then charged back, and more. A decline fails exactly like a live one (422, the bank code in `code` and `failureCode`, a `payment.failed` webhook). With a live key these numbers are refused with 400 `test_card_in_live_mode`. Full list: [test cards](https://docs.pay.vexwallet.co/vpos#test-card).
+With a test API key, VPOS test cards return a fixed outcome without reaching the bank: `4242424242424242` succeeds, `4000000000009995` is declined with `G51` (insufficient funds), `4000000000000259` completes and is then charged back, and more. A decline fails exactly like a live one (422, the bank code in `code` and `failureCode`, a `payment.failed` webhook). With a live key these numbers are refused with 400 `test_card_in_live_mode`. Full list: [test cards](https://docs.vexpay.app/vpos#test-card).
 
 ## Artisan
 

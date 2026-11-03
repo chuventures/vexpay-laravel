@@ -25,10 +25,10 @@ final class BillableTest extends TestCase
 
     public function testCheckoutRedirectsToHostedPageAndStoresPendingPayment(): void
     {
-        $fake = VexPay::fake(['CheckoutSessions_create' => ['url' => 'https://pay.vexwallet.co/c/cs_1', 'id' => 'cs_1']]);
+        $fake = VexPay::fake(['CheckoutSessions_create' => ['url' => 'https://pay.vexpay.app/c/cs_1', 'id' => 'cs_1']]);
         $order = Order::create(['number' => '1042']);
 
-        $this->post("/orders/{$order->id}/pay")->assertRedirect('https://pay.vexwallet.co/c/cs_1')->assertStatus(303);
+        $this->post("/orders/{$order->id}/pay")->assertRedirect('https://pay.vexpay.app/c/cs_1')->assertStatus(303);
 
         VexPay::assertCheckoutCreated(25.00);
         VexPay::assertCheckoutCreated(static fn (array $body) => $body['successUrl'] === 'https://shop.example/gracias'

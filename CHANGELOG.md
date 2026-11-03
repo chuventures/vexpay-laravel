@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.13
+
+- `VEXPAY_BASE_URL` now defaults to `https://api.vexpay.app`; the earlier host `https://api.pay.vexwallet.co` keeps working. Allows `vexpay/vexpay-php` 0.14.
+
 ## 0.1.12
 
 - Allow `vexpay/vexpay-php` 0.13: `VexPay::crypto()->simulateDeposit()` for test-mode stablecoin deposits.

@@ -14,7 +14,7 @@ return [
 
     'api_key' => env('VEXPAY_API_KEY'),
 
-    'base_url' => env('VEXPAY_BASE_URL', 'https://api.pay.vexwallet.co'),
+    'base_url' => env('VEXPAY_BASE_URL', 'https://api.vexpay.app'),
 
     'timeout' => (int) env('VEXPAY_TIMEOUT', 30),
 
