@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.17
+
+- Allows `vexpay/vexpay-php` 0.23 (checkout session `paymentInProgress` for Pago Móvil paid in several transfers).
+
 ## 0.1.16
 
 - Requests made through the container client and the `VexPay` facade identify Laravel: with `vexpay/vexpay-php` 0.20 or later, the client passes `app_info` `vexpay-laravel` and the package version, sent in the `VexPay-Client` header and the `User-Agent`. Older `vexpay-php` versions keep working unchanged.
