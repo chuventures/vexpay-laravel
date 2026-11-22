@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 /**
  * README samples reference application classes (App\Models\Order…), so they are parsed rather
- * than run; behaviour is covered by the feature tests. Every imported VEXPay class must exist.
+ * than run; behaviour is covered by the feature tests. Every imported VEX Pay class must exist.
  */
 final class ReadmeTest extends BaseTestCase
 {

@@ -10,7 +10,7 @@ use VexPay\Webhook\PaymentWebhookData;
 use VexPay\Webhook\WebhookEvent;
 
 /**
- * Applies payment.* webhooks to `vexpay_payments` as a state machine. VEXPay's delivery id
+ * Applies payment.* webhooks to `vexpay_payments` as a state machine. VEX Pay's delivery id
  * changes per attempt, so idempotency comes from the transitions themselves: each one is a
  * conditional update on the allowed predecessor states, and billing events fire only when that
  * update changed a row — once per transition even under concurrent duplicate deliveries.

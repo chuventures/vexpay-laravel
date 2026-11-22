@@ -1,6 +1,6 @@
-# VEXPay for Laravel
+# VEX Pay for Laravel
 
-The official Laravel integration for [VEXPay](https://vexpay.app): accept Venezuelan payments (Pago Móvil C2P, cards, débito inmediato, USDT) and pay out to sellers, the Laravel way.
+The official Laravel integration for [VEX Pay](https://vexpay.app): accept Venezuelan payments (Pago Móvil C2P, cards, débito inmediato, USDT) and pay out to sellers, the Laravel way.
 
 - `VexPay` facade and a container-bound client with the full API ([`vexpay/vexpay-php`](https://github.com/chuventures/vexpay-php))
 - Verified webhooks at `/vexpay/webhook`, dispatched as Laravel events
@@ -21,14 +21,14 @@ php artisan migrate
 
 Published on [Packagist](https://packagist.org/packages/vexpay/laravel); it pulls in [`vexpay/vexpay-php`](https://packagist.org/packages/vexpay/vexpay-php) and works with the Guzzle 7 or 8 that your app already has.
 
-`vexpay:install` publishes `config/vexpay.php` and the `vexpay_payments` migration, then prints the webhook URL to register. Add your keys to `.env` (VEXPay dashboard — use the test-mode key while you build):
+`vexpay:install` publishes `config/vexpay.php` and the `vexpay_payments` migration, then prints the webhook URL to register. Add your keys to `.env` (VEX Pay dashboard — use the test-mode key while you build):
 
 ```dotenv
 VEXPAY_API_KEY=
 VEXPAY_WEBHOOK_SECRET=
 ```
 
-Then register `https://your-app.example/vexpay/webhook` as a webhook endpoint in the VEXPay dashboard and check delivery with `php artisan vexpay:webhook-test`.
+Then register `https://your-app.example/vexpay/webhook` as a webhook endpoint in the VEX Pay dashboard and check delivery with `php artisan vexpay:webhook-test`.
 
 Optional settings: `VEXPAY_BASE_URL`, `VEXPAY_TIMEOUT`, `VEXPAY_MAX_NETWORK_RETRIES`, `VEXPAY_WEBHOOK_PATH`, `VEXPAY_WEBHOOK_TOLERANCE`, `VEXPAY_WEBHOOK_ROUTE`, `VEXPAY_JS_VERSION`.
 
@@ -43,7 +43,7 @@ $quote = VexPay::quotes()->retrieve(['usdAmount' => 25]);
 $payment = VexPay::payments()->retrieve('pay_123');
 $banks = VexPay::banks()->list();
 
-// Colombian pesos (PSE, Bancolombia, Bre-B, Nequi, Daviplata) — VexPay::cop()->channels() lists what you can use; see the vexpay-php README for every channel and the test values.
+// Colombian pesos (Bre-B, Nequi, Daviplata) — VexPay::cop()->channels() lists what you can use; see the vexpay-php README for every channel and the test values.
 $cop = VexPay::cop()->payments->create(['amountCop' => 100000, 'channel' => 'breb', 'reference' => 'order-1042']);
 ```
 
@@ -65,7 +65,7 @@ class Order extends Model
 }
 ```
 
-Return a checkout from a controller and the buyer is redirected (303) to the hosted VEXPay checkout:
+Return a checkout from a controller and the buyer is redirected (303) to the hosted VEX Pay checkout:
 
 ```php
 use App\Models\Order;
@@ -88,7 +88,7 @@ class PayOrderController
 
 ### Fulfil from the webhook
 
-VEXPay's `payment.*` webhooks update the local record. Status only moves forward (`PENDING` → `COMPLETED` / `FAILED` / `CANCELED`, `COMPLETED` → `REVERSED`), so retries, duplicates and out-of-order deliveries are harmless, and these events fire **exactly once per transition** — fulfil orders here:
+VEX Pay's `payment.*` webhooks update the local record. Status only moves forward (`PENDING` → `COMPLETED` / `FAILED` / `CANCELED` / `REVERSED`, `COMPLETED` → `REVERSED`), so retries, duplicates and out-of-order deliveries are harmless, and these events fire **exactly once per transition** — fulfil orders here. A reversal that arrives before its completion still lands, so `PaymentReversed` can fire without a `PaymentSucceeded` before it:
 
 ```php
 use Illuminate\Support\Facades\Event;
@@ -160,7 +160,7 @@ class NotifySellerOfFailedPayout implements ShouldQueue
 }
 ```
 
-These per-delivery events fire again when VEXPay retries or resends a delivery (the `VexPay-Event-Id` header is per attempt), so make listeners idempotent — or use the billing events, which already are.
+These per-delivery events fire again when VEX Pay retries or resends a delivery (the `VexPay-Event-Id` header is per attempt), so make listeners idempotent — or use the billing events, which already are.
 
 To mount the endpoint yourself, set `VEXPAY_WEBHOOK_ROUTE=false` and keep the middleware in front of the controller:
 
@@ -191,13 +191,14 @@ $seller->createAsVexPayMerchant([
     'name' => 'María Pérez',
     'identification' => 'V12345678',
     'contactEmail' => 'maria@example.com',
-    'contactPhone' => '04141234567',
+    'contactPhone' => '04141873562',
 ]);
 
-$method = $seller->addVexPayPayoutMethod(['bankCode' => '0102', 'phone' => '04141234567']);
+$method = $seller->addVexPayPayoutMethod(['bankCode' => '0102', 'phone' => '04141873562']);
 $seller->startVexPayPayoutMethodVerification($method->payoutMethodId);
 // later, with what the seller received:
-$seller->confirmVexPayPayoutMethodVerification($method->payoutMethodId, ['amount' => '1.23']);
+$seller->confirmVexPayPayoutMethodVerification($method->payoutMethodId, ['amount1' => '0.37', 'amount2' => '0.82']);
+// amount1/amount2: the two micro-deposits (each 0.XX Bs). In test mode the start response's testAmounts holds them.
 
 $seller->vexpayMerchantStatus();   // e.g. "verified"
 $seller->vexpayBalance();
@@ -261,7 +262,7 @@ With a test API key, VPOS test cards return a fixed outcome without reaching the
 | Command | |
 |---|---|
 | `vexpay:install [--merchant-table=]` | Publish config and migrations, print setup steps |
-| `vexpay:webhook-test` | Ask VEXPay to send `notification.test` to your registered endpoints |
+| `vexpay:webhook-test` | Ask VEX Pay to send `notification.test` to your registered endpoints |
 
 ## License
 

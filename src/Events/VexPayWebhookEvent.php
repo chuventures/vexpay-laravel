@@ -9,7 +9,7 @@ use VexPay\Webhook\WebhookEvent;
 
 /**
  * Base of every webhook-driven event. `$webhook` is the verified delivery
- * (`->event`, `->data`, `->timestamp`). Fires once per delivery attempt — VEXPay retries
+ * (`->event`, `->data`, `->timestamp`). Fires once per delivery attempt — VEX Pay retries
  * and resends, so listeners must be idempotent.
  */
 abstract class VexPayWebhookEvent

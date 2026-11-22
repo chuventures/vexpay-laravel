@@ -29,7 +29,7 @@ final class VexPayServiceProvider extends ServiceProvider
             $config = $app['config']['vexpay'];
             if (blank($config['api_key'] ?? null)) {
                 throw new ConfigurationException(
-                    'No VEXPay API key configured. Set VEXPAY_API_KEY in your .env (find it in the VEXPay dashboard).',
+                    'No VEX Pay API key configured. Set VEXPAY_API_KEY in your .env (find it in the VEX Pay dashboard).',
                 );
             }
 

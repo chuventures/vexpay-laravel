@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.15
+
+- Allows `vexpay/vexpay-php` 0.16 to 0.19, so `composer require vexpay/laravel` gets marketplace `splits` (0.16), `amountVes` checkout sessions (0.17) and `successButtonLabel` (0.18) and merchant `applicationFeePercent` on create (0.19). It used to stop at 0.15.
+- README: Colombian pesos are Bre-B, Nequi and Daviplata (card, PSE and Bancolombia were removed).
+
+## 0.1.14
+
+- Allows `vexpay/vexpay-php` 0.15 (checking-account payout accounts).
+- Package metadata: the Packagist homepage and `support.docs` point at https://docs.vexpay.app/laravel, `support.source` at the GitHub repo, and VEX Pay (https://vexpay.app) is listed as the author.
+
 ## 0.1.13
 
 - `VEXPAY_BASE_URL` now defaults to `https://api.vexpay.app`; the earlier host `https://api.pay.vexwallet.co` keeps working. Allows `vexpay/vexpay-php` 0.14.

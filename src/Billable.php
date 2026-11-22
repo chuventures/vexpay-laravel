@@ -10,7 +10,7 @@ use VexPay\Laravel\Models\Payment;
 use VexPay\VexPayClient;
 
 /**
- * One-time VEXPay checkouts for any Eloquent model (an Order, an Invoice, a User…).
+ * One-time VEX Pay checkouts for any Eloquent model (an Order, an Invoice, a User…).
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  */

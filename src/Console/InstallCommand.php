@@ -13,7 +13,7 @@ final class InstallCommand extends Command
     protected $signature = 'vexpay:install
         {--merchant-table= : Also publish a migration adding vexpay_merchant_id to this table (for HasVexPayMerchant)}';
 
-    protected $description = 'Publish the VEXPay config and migrations and print the remaining setup steps';
+    protected $description = 'Publish the VEX Pay config and migrations and print the remaining setup steps';
 
     public function handle(Filesystem $files): int
     {
@@ -39,14 +39,14 @@ final class InstallCommand extends Command
         $this->newLine();
         $this->line('  <options=bold>Next steps</>');
         $this->newLine();
-        $this->line('  1. Add your keys to .env (from the VEXPay dashboard — use the test-mode key while building):');
+        $this->line('  1. Add your keys to .env (from the VEX Pay dashboard — use the test-mode key while building):');
         $this->newLine();
         $this->line('       VEXPAY_API_KEY=');
         $this->line('       VEXPAY_WEBHOOK_SECRET=');
         $this->newLine();
         $this->line('  2. Run the migrations:  php artisan migrate');
         $this->newLine();
-        $this->line('  3. Register this webhook URL in the VEXPay dashboard (Webhooks):');
+        $this->line('  3. Register this webhook URL in the VEX Pay dashboard (Webhooks):');
         $this->newLine();
         $this->line('       ' . url((string) config('vexpay.webhook.path', 'vexpay/webhook')));
         $this->newLine();

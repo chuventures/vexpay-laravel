@@ -66,7 +66,7 @@ final class VexPayFake
     {
         PHPUnit::assertNotEmpty(
             $this->matching($operationId, $callback),
-            sprintf('Expected VEXPay %s to be called%s, but it was not.', $operationId, $callback ? ' with matching parameters' : ''),
+            sprintf('Expected VEX Pay %s to be called%s, but it was not.', $operationId, $callback ? ' with matching parameters' : ''),
         );
     }
 
@@ -77,14 +77,14 @@ final class VexPayFake
     {
         PHPUnit::assertEmpty(
             $this->matching($operationId, $callback),
-            sprintf('Unexpected VEXPay %s call.', $operationId),
+            sprintf('Unexpected VEX Pay %s call.', $operationId),
         );
     }
 
     public function assertNothingSent(): void
     {
         $sent = array_map(static fn (RecordedRequest $r) => $r->operationId, $this->http->recorded());
-        PHPUnit::assertSame([], $sent, 'Unexpected VEXPay calls: ' . implode(', ', $sent));
+        PHPUnit::assertSame([], $sent, 'Unexpected VEX Pay calls: ' . implode(', ', $sent));
     }
 
     /**

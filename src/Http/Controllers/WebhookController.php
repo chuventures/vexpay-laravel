@@ -15,7 +15,7 @@ use VexPay\Webhook\WebhookEvent;
 
 /**
  * Dispatches events for a verified delivery and syncs local payments before answering, so
- * VEXPay only sees a 2xx once local state is persisted (a failure here makes VEXPay retry).
+ * VEX Pay only sees a 2xx once local state is persisted (a failure here makes VEX Pay retry).
  */
 final class WebhookController
 {
@@ -24,7 +24,7 @@ final class WebhookController
         $event = $request->attributes->get(VerifyWebhookSignature::EVENT_ATTRIBUTE);
         if (!$event instanceof WebhookEvent) {
             throw new \LogicException(sprintf(
-                'The VEXPay webhook controller must run behind the %s middleware.',
+                'The VEX Pay webhook controller must run behind the %s middleware.',
                 VerifyWebhookSignature::class,
             ));
         }

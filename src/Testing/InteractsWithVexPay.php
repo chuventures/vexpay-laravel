@@ -8,7 +8,7 @@ use Illuminate\Testing\TestResponse;
 use VexPay\Laravel\Models\Payment;
 
 /**
- * Use in Laravel feature tests to post signed VEXPay webhooks to your webhook route.
+ * Use in Laravel feature tests to post signed VEX Pay webhooks to your webhook route.
  *
  * @mixin \Illuminate\Foundation\Testing\TestCase
  */

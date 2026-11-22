@@ -12,7 +12,7 @@ final class WebhookTestCommand extends Command
 {
     protected $signature = 'vexpay:webhook-test';
 
-    protected $description = 'Ask VEXPay to send a notification.test webhook to your registered endpoints';
+    protected $description = 'Ask VEX Pay to send a notification.test webhook to your registered endpoints';
 
     public function handle(): int
     {
@@ -20,7 +20,7 @@ final class WebhookTestCommand extends Command
             $result = $this->laravel->make(VexPayClient::class)->webhookEndpoints->sendTest();
         } catch (VexPayException $e) {
             $this->components->error(sprintf(
-                'VEXPay did not accept the request%s: %s',
+                'VEX Pay did not accept the request%s: %s',
                 $e->getErrorCode() !== null ? ' (' . $e->getErrorCode() . ')' : '',
                 $e->getMessage(),
             ));
@@ -29,13 +29,13 @@ final class WebhookTestCommand extends Command
         }
 
         if (!$result->sent) {
-            $this->components->warn('VEXPay accepted the request but sent nothing — register a webhook endpoint in the dashboard first.');
+            $this->components->warn('VEX Pay accepted the request but sent nothing — register a webhook endpoint in the dashboard first.');
 
             return self::FAILURE;
         }
 
         $this->components->info(sprintf(
-            'VEXPay is sending %s to your registered webhook endpoints. Watch for the NotificationTest event.',
+            'VEX Pay is sending %s to your registered webhook endpoints. Watch for the NotificationTest event.',
             $result->event,
         ));
 

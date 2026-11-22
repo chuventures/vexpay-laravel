@@ -24,7 +24,7 @@ final class VerifyWebhookSignature
         $secret = config('vexpay.webhook.secret');
         if (blank($secret)) {
             report(new ConfigurationException(
-                'VEXPay webhook received but no signing secret is configured. Set VEXPAY_WEBHOOK_SECRET in your .env.',
+                'VEX Pay webhook received but no signing secret is configured. Set VEXPAY_WEBHOOK_SECRET in your .env.',
             ));
 
             return response()->json(['error' => 'webhook_secret_not_configured'], 500);

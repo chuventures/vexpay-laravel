@@ -10,7 +10,7 @@ use VexPay\Generated\Models as M;
 use VexPay\VexPayClient;
 
 /**
- * Sellers on your platform as VEXPay merchants. Needs a nullable `vexpay_merchant_id`
+ * Sellers on your platform as VEX Pay merchants. Needs a nullable `vexpay_merchant_id`
  * column (`php artisan vexpay:install --merchant-table=<table>` publishes the migration).
  *
  * @mixin \Illuminate\Database\Eloquent\Model
@@ -18,7 +18,7 @@ use VexPay\VexPayClient;
 trait HasVexPayMerchant
 {
     /**
-     * Create the VEXPay merchant for this model and store its id. Safe to retry: the external
+     * Create the VEX Pay merchant for this model and store its id. Safe to retry: the external
      * reference is stable, and a merchant that already exists for it is adopted.
      *
      * @param array<string, mixed> $params name, identification, contactEmail, contactPhone, bankCode, phone
@@ -27,7 +27,7 @@ trait HasVexPayMerchant
     {
         if ($this->hasVexPayMerchant()) {
             throw new \LogicException(sprintf(
-                '%s [%s] is already VEXPay merchant %s.',
+                '%s [%s] is already VEX Pay merchant %s.',
                 static::class,
                 $this->getKey(),
                 $this->vexpayMerchantId(),
@@ -138,7 +138,7 @@ trait HasVexPayMerchant
     protected function requireVexPayMerchantId(): string
     {
         return $this->vexpayMerchantId() ?? throw new \LogicException(sprintf(
-            '%s [%s] is not a VEXPay merchant yet. Call createAsVexPayMerchant() first.',
+            '%s [%s] is not a VEX Pay merchant yet. Call createAsVexPayMerchant() first.',
             static::class,
             $this->getKey(),
         ));

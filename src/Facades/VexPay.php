@@ -42,7 +42,7 @@ use VexPay\VexPayClient;
 final class VexPay extends Facade
 {
     /**
-     * Swap the VEXPay client for an in-memory fake: no request leaves the process, every
+     * Swap the VEX Pay client for an in-memory fake: no request leaves the process, every
      * operation answers with a valid response, and calls can be asserted.
      *
      * @param array<string, mixed> $stubs responses keyed by operationId, e.g. ['Payouts_create' => ['status' => 'completed']]

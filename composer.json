@@ -1,6 +1,6 @@
 {
   "name": "vexpay/laravel",
-  "description": "Official Laravel integration for VEXPay: verified webhooks as events, Billable checkouts, marketplace payouts, and test fakes.",
+  "description": "Official Laravel integration for VEX Pay: verified webhooks as events, Billable checkouts, marketplace payouts, and test fakes.",
   "type": "library",
   "license": "MIT",
   "keywords": [
@@ -13,9 +13,17 @@
     "webhooks",
     "checkout"
   ],
-  "homepage": "https://github.com/chuventures/vexpay-laravel",
+  "homepage": "https://docs.vexpay.app/laravel",
+  "authors": [
+    {
+      "name": "VEX Pay",
+      "homepage": "https://vexpay.app"
+    }
+  ],
   "support": {
-    "issues": "https://github.com/chuventures/vexpay-laravel/issues"
+    "docs": "https://docs.vexpay.app/laravel",
+    "issues": "https://github.com/chuventures/vexpay-laravel/issues",
+    "source": "https://github.com/chuventures/vexpay-laravel"
   },
   "require": {
     "php": "^8.2",
@@ -26,7 +34,7 @@
     "illuminate/routing": "^12.0|^13.0",
     "illuminate/support": "^12.0|^13.0",
     "illuminate/view": "^12.0|^13.0",
-    "vexpay/vexpay-php": "^0.1 || ^0.2 || ^0.3 || ^0.4 || ^0.5 || ^0.6 || ^0.7 || ^0.8 || ^0.9 || ^0.10 || ^0.11 || ^0.12 || ^0.13 || ^0.14"
+    "vexpay/vexpay-php": "^0.1 || ^0.2 || ^0.3 || ^0.4 || ^0.5 || ^0.6 || ^0.7 || ^0.8 || ^0.9 || ^0.10 || ^0.11 || ^0.12 || ^0.13 || ^0.14 || ^0.15 || ^0.16 || ^0.17 || ^0.18 || ^0.19"
   },
   "require-dev": {
     "orchestra/testbench": "^10.0|^11.0",

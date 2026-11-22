@@ -8,7 +8,7 @@ use VexPay\Laravel\Models\Payment;
 use VexPay\Webhook;
 
 /**
- * A webhook delivery signed exactly like VEXPay signs it, for exercising your webhook
+ * A webhook delivery signed exactly like VEX Pay signs it, for exercising your webhook
  * handling end to end in tests.
  */
 final class SignedWebhook

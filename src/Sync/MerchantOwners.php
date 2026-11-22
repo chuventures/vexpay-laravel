@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use VexPay\Laravel\HasVexPayMerchant;
 
 /**
- * Finds the Eloquent model a VEXPay merchant was created from.
+ * Finds the Eloquent model a VEX Pay merchant was created from.
  */
 final class MerchantOwners
 {

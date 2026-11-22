@@ -11,7 +11,7 @@ use VexPay\Laravel\Models\Payment;
 
 /**
  * A local payment changed status. Fires exactly once per transition, however many times
- * VEXPay delivers the underlying webhook — safe to fulfil orders from.
+ * VEX Pay delivers the underlying webhook — safe to fulfil orders from.
  */
 abstract class BillingEvent
 {

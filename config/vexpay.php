@@ -7,7 +7,7 @@ return [
     | API credentials
     |--------------------------------------------------------------------------
     |
-    | Your secret API key from the VEXPay dashboard. Use the test-mode key while
+    | Your secret API key from the VEX Pay dashboard. Use the test-mode key while
     | you build. Keep it in .env — never commit it or send it to the browser.
     |
     */
@@ -25,7 +25,7 @@ return [
     | Webhooks
     |--------------------------------------------------------------------------
     |
-    | The signing secret of the webhook endpoint you registered in VEXPay, and
+    | The signing secret of the webhook endpoint you registered in VEX Pay, and
     | where the package listens. Set `route` to false to mount the controller
     | yourself (keep the VerifyWebhookSignature middleware in front of it).
     |
