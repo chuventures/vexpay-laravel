@@ -39,9 +39,16 @@ final class VexPayServiceProvider extends ServiceProvider
                 'timeout' => $config['timeout'] ?? null,
                 'max_network_retries' => $config['max_network_retries'] ?? null,
                 'http_client' => $app->bound(self::HTTP_CLIENT) ? $app->make(self::HTTP_CLIENT) : null,
+                // Identifies Laravel in the VexPay-Client header. vexpay-php < 0.20 rejects unknown options.
+                'app_info' => self::supportsAppInfo() ? ['name' => 'vexpay-laravel', 'version' => Version::VERSION] : null,
             ], static fn ($value) => $value !== null && $value !== ''));
         });
         $this->app->singleton('vexpay', static fn (Application $app) => $app->make(VexPayClient::class));
+    }
+
+    public static function supportsAppInfo(): bool
+    {
+        return version_compare(\VexPay\Version::VERSION, '0.20.0', '>=');
     }
 
     public function boot(): void

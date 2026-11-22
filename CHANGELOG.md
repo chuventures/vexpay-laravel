@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.16
+
+- Requests made through the container client and the `VexPay` facade identify Laravel: with `vexpay/vexpay-php` 0.20 or later, the client passes `app_info` `vexpay-laravel` and the package version, sent in the `VexPay-Client` header and the `User-Agent`. Older `vexpay-php` versions keep working unchanged.
+- Allows `vexpay/vexpay-php` 0.20 to 0.22 (0.21: retries only real rate limits; 0.22: merchant `displayName` and `logoUrl`).
+
 ## 0.1.15
 
 - Allows `vexpay/vexpay-php` 0.16 to 0.19, so `composer require vexpay/laravel` gets marketplace `splits` (0.16), `amountVes` checkout sessions (0.17) and `successButtonLabel` (0.18) and merchant `applicationFeePercent` on create (0.19). It used to stop at 0.15.

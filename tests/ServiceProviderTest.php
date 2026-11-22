@@ -35,6 +35,18 @@ final class ServiceProviderTest extends TestCase
         self::assertSame('/v1/payments/pay_123', $request->path);
     }
 
+    public function testRequestsIdentifyLaravelInTheVexPayClientHeader(): void
+    {
+        $http = new FakeHttpClient();
+        $this->app->instance(VexPayServiceProvider::HTTP_CLIENT, $http);
+
+        VexPay::payments()->retrieve('pay_123');
+
+        $header = json_decode((string) $http->recorded()[0]->header('VexPay-Client'), true);
+        self::assertSame('vexpay-php', $header['sdk']);
+        self::assertSame(['name' => 'vexpay-laravel', 'version' => \VexPay\Laravel\Version::VERSION], $header['app']);
+    }
+
     public function testMissingApiKeyFailsAtCallTimeNamingTheEnvVar(): void
     {
         config(['vexpay.api_key' => null]);

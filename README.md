@@ -34,7 +34,7 @@ Optional settings: `VEXPAY_BASE_URL`, `VEXPAY_TIMEOUT`, `VEXPAY_MAX_NETWORK_RETR
 
 ## Calling the API
 
-The facade (or an injected `VexPay\VexPayClient`) exposes every operation of the PHP SDK, with retries, idempotency keys and typed responses:
+The facade (or an injected `VexPay\VexPayClient`) exposes every operation of the PHP SDK, with retries, idempotency keys and typed responses. A `429` is retried only when it is a rate limit (body `rate_limited` or a `RateLimit` header), after `Retry-After`; a risk decline (`CARD_VELOCITY_BLOCKED`, `PAYER_BLOCKED`) throws `RateLimitException` at once, with `isRateLimit()` false:
 
 ```php
 use VexPay\Laravel\Facades\VexPay;
