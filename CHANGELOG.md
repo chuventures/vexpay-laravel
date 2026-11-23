@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.18
+
+- Allows `vexpay/vexpay-php` 0.24 (partial Pago Móvil progress on `payment.pending` and the expired `payment.failed`).
+
 ## 0.1.17
 
 - Allows `vexpay/vexpay-php` 0.23 (checkout session `paymentInProgress` for Pago Móvil paid in several transfers).
