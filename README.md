@@ -214,6 +214,22 @@ Balance top-ups (loading your own Bs balance by Pago Móvil, enabled per account
 
 In test mode, `VexPay::crypto()->simulateDeposit(['customerRef' => 'user_123', 'network' => 'TRC20', 'amount' => '40.00'])` makes a deposit arrive at one of your stablecoin deposit addresses (same payment, fee and `payment.completed` webhook, with `livemode: false`), available with a `vexpay/vexpay-php` release that includes it.
 
+One-shot payment links, the payments list and CSV export, and webhook delivery history also go through the client, available with a `vexpay/vexpay-php` release that includes them:
+
+```php
+$link = VexPay::paymentLinks()->create(['amount' => '25.00', 'description' => 'Torta de chocolate', 'reference' => 'order-1042']);
+VexPay::paymentLinks()->list(['kind' => 'one_shot']);   // also retrieve($id) for either kind, and cancel($id)
+
+foreach (VexPay::payments()->list(['status' => 'COMPLETED', 'createdFrom' => '2026-11-01']) as $payment) { /* every page */ }
+$csv = VexPay::payments()->export(['createdFrom' => '2026-11-01', 'createdTo' => '2026-11-30']);
+
+VexPay::webhookEndpoints()->listDeliveries($endpointId, ['status' => 'failed']);
+VexPay::webhookEndpoints()->resendDelivery($endpointId, $deliveryId);
+$secret = VexPay::webhookEndpoints()->rotateSecret($endpointId, ['expiresInHours' => 24])->secret; // shown once: update VEXPAY_WEBHOOK_SECRET
+```
+
+API errors throw `VexPay\Exception\VexPayException` subclasses: `getErrorCode()` is the stable `code` (e.g. `insufficient_balance`) and `getDocUrl()` links to its entry on https://docs.vexpay.app/errors.
+
 ## Testing
 
 `VexPay::fake()` swaps the client for an in-memory one: nothing leaves the process, every operation answers with a valid response (echoing what you sent), and calls can be asserted. Stub responses by `operationId`. Signed webhooks come from the `InteractsWithVexPay` trait:

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.19
+
+- Allows `vexpay/vexpay-php` 0.25: `VexPay::paymentLinks()->create/list/retrieve/cancel` for one-shot payment links, `VexPay::payments()->list()` and `export()` (CSV), `VexPay::webhookEndpoints()->listDeliveries/resendDelivery/rotateSecret`, and `getDocUrl()` on API exceptions (`getErrorCode()` now reads the API's stable `code`). `VexPay::fake()` answers the new operations. README: a section on these calls.
+
 ## 0.1.18
 
 - Allows `vexpay/vexpay-php` 0.24 (partial Pago Móvil progress on `payment.pending` and the expired `payment.failed`).
